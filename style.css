@@ -1,9 +1,9 @@
-
-*{
+c*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 body{
     background-color: rgb(255, 228, 196);
     color: rgb(255, 162, 0);
@@ -16,10 +16,9 @@ header {
     align-items: center;
     background-color: rgb(250, 242, 234);
     padding: 20px 30px;
- box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-     
-    
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
+
 .top-line {
   background-color: rgb(255, 162, 0);
   color: bisque;
@@ -32,7 +31,27 @@ header {
 
 .sitio img{
     width: 100px;
+}
 
+.card {
+  border: none;
+  box-shadow: 0 6px 10px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.04);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.card-title {
+  color: #0056b3;
 }
 
 header .sitio {
@@ -43,13 +62,16 @@ header nav{
     display: inline-block;
 
 }
+
 header nav ul{
     padding: 0;
 }
+
 header nav ul li{
     list-style: none;
    display: inline-block;
 }
+
 header nav ul li a{
     margin: 10px;
  text-decoration: none;
@@ -59,6 +81,7 @@ header nav ul li a{
 #portfolio{
     background-color: bisque;
 }
+
 #portfolio section{
    display: flex;
    flex-wrap: wrap;
@@ -67,6 +90,7 @@ header nav ul li a{
    height: auto;
    border: 2px solid black;
 }
+
 #portfolio article{
     width: auto;
     min-width: 200px;
@@ -75,10 +99,11 @@ header nav ul li a{
     padding: 1rem;
     border-radius: 8px;
 }
+
 #portfolio article img{
-    width: 100%;
-    
+    width: 100%;   
 }
+
 footer{
   background-color: rgb(255, 162, 0);
   color: bisque;  
@@ -93,6 +118,7 @@ footer{
   flex-direction: column;
   align-items: center;
 }
+
 footer .links{
      color: bisque;
      padding: 30px;  
@@ -100,9 +126,11 @@ footer .links{
      display: flex;
      justify-content: space-between;
 }
+
 footer .links b{
     font-size: 20px;
 }
+
 footer .links ul li{
   list-style-type: none;
   padding-left: 0;
@@ -119,22 +147,27 @@ footer .links ul li a{
     width: 1000px;
     margin: auto;
 }
+
 #iniciar main{
     margin-top: 3rem;
 }
+
 #iniciar main h1{
     font-family: 'poppins';
     font-size: 3rem;
 }
+
 #iniciar h1{
     display: block;
 }
+
 #iniciar label{
   display: block;
   font-size: 1.5rem;
   font-family: 'poppins';
   margin: 10px 0;
 }
+
 input , textarea{
     width: 500px;
     border: 1px solid #aa742e;
@@ -153,14 +186,16 @@ button{
     margin-top: 20px;
     position: relative;
     top: 0px; 
-   
 }
+
 #iniciar header {
   text-align: center;
 }
+
 #inicar header h1 {
   width: 100%;
 }
+
 #iniciar .formulario{
    background-color: rgb(255, 228, 196);
 }
