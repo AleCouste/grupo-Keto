@@ -13,7 +13,7 @@
     <div class=" top-line">
         <b>retiro en todas nuentras sucursales 📦</b>
     </div>
-<?php include 'C:\xampp\htdocs\keto-sur\esencials\navbar.php' ?>
+<?php include 'esencials/navbar.php' ?>
 <style>
     p img{
         width: 250px;
@@ -26,6 +26,7 @@ if (isset($_POST['submit'])) {
     $password = "";
     $dbname = "keto";
 
+    // Crear conexión
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     // Verificar conexión
@@ -33,56 +34,39 @@ if (isset($_POST['submit'])) {
         die("Conexión fallida: " . $conn->connect_error);
     }
 
-    // Limpieza del dato ingresado
-    $searchString = mysqli_real_escape_string($conn, trim(htmlentities($_POST['search'])));
+    // Recoger el término de búsqueda desde POST
+    $busqueda = $_POST['q'];
 
-    // Validaciones básicas
-    if ($searchString === "" || !ctype_alnum($searchString) || strlen($searchString) < 3) {
-        echo "Búsqueda inválida";
-        exit();
-    }
-
-    $searchString = "%$searchString%";
-
-    $sql = "SELECT * FROM productos WHERE categoria LIKE ?";
-
-    // Preparar y ejecutar la consulta
-    $prepared_stmt = $conn->prepare($sql);
-
-    if (!$prepared_stmt) {
-        echo "Error en la preparación de la consulta: " . $conn->error;
-        exit();
-    }
-
-    $prepared_stmt->bind_param('s', $searchString);
-    $prepared_stmt->execute();
-
-    $result = $prepared_stmt->get_result();
-
-    if ($result->num_rows === 0) {
-        echo "No se encontraron productos.";
-    } else {
-    while ($row = $result->fetch_assoc()) { 
-        ?>
-        <div class="col-sm-3">
-            <div class="panel">
-                <div class="panel-heading" style="text-align: center;"><?php echo $row['nombre'] ?> </div>
-                    <p class="panel-body"><img class="imagen" src='https://cdn.pixabay.com/photo/2018/11/22/18/17/elephant-3832516_640.jpg' alt='test'></p>
-                <div class="panel-footer" style="text-align: center;"> $<?php echo $row['precio'] ?> </div>
-            </div>
-        </div>
-    <?php
-        }
-    }
-
-    // Cerrar conexión
-    $prepared_stmt->close();
-    $conn->close();
-
-} else {
-    echo "¡Acceso no permitido!";
-    exit();
-}
+    // Preparar y ejecutar la consulta segura
+    $stmt = $conn->prepare("SELECT * FROM productos WHERE nombre LIKE ? OR categoria LIKE ?");
+    $like = "%" . $busqueda . "%";
+    $stmt->bind_param("ss", $like, $like);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
 ?>
+
+<div class="container mt-4">
+  <h2>Resultados para "<?= htmlspecialchars($busqueda) ?>"</h2>
+  <div class="row">
+    <?php while ($producto = $resultado->fetch_assoc()) { ?>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img src="<?= $producto['imagen'] ?>" class="card-img-top">
+          <div class="card-body">
+            <h5><?= $producto['nombre'] ?></h5>
+            <p><strong>$<?= $producto['precio'] ?></strong></p>
+            <p>stock = x<?= $producto['stock'] ?></p>
+              <?php if ($producto['stock'] > 0): ?>
+                <button class="btn btn-success" onclick="agregarAlCarrito(<?php echo $producto['id']; ?>) ">Agregar al carrito</button>
+              <?php else: ?>
+                <button class="btn btn-secondary" disabled>Sin stock</button>
+              <?php endif; ?>
+          </div>
+        </div>
+      </div>
+    <?php } ?>
+  </div>
+</div>
 </body>
+<?php } ?>
 </html>

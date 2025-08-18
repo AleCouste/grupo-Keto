@@ -13,24 +13,43 @@
 $resultado = mysqli_query($conn, "SELECT * FROM productos ORDER BY ID");
 
 while ($row = mysqli_fetch_assoc($resultado)) { ?>
-<style>
-    .imagen {
-      width: 270px;
-      height: auto;
-    }
-    .panel-heading{
-        background-color: #f4851e;
-        color: black;
-    }
-</style>
-    <div class="col-sm-3">
-        <div class="panel">
-            <div class="panel-heading" style="text-align: center;"><?php echo $row['nombre'] ?> </div>
-            <p class="panel-body"> <img class="imagen" src='https://cdn.pixabay.com/photo/2018/11/22/18/17/elephant-3832516_640.jpg' alt='test'></p>
-            <div class="panel-footer" style="text-align: center;"> $<?php echo $row['precio'] ?> </div>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="carrito.js" defer></script>
+</head>
+<body>
+<div class="container mt-4">
+  <div class="row">
+    <?php
+    $resultado = $conn->query("SELECT * FROM productos");
+    while ($producto = $resultado->fetch_assoc()) {
+    ?>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <img src="<?= $producto['imagen'] ?>" class="card-img-top" alt="Imagen">
+          <div class="card-body">
+            <h5 class="card-title"><?= $producto['nombre'] ?></h5>
+            <p><strong>$<?= $producto['precio'] ?></strong></p>
+            <p>Stock disponible: <?= $producto['stock'] ?></p>
+            <script>
+              function Toast() {
+                  Toastify({
+                    text: "¡Compra realizada con éxito!",
+                    duration: 3000,
+                    gravity: "top", // top o bottom
+                    position: "right", // left, center o right
+                    backgroundColor: "#4CAF50",
+                    close: true
+                  }).showToast();
+              }
+            </script>
+            <button class="btn btn-success" onclick="Toast(); agregarAlCarrito(<?= $producto['id'] ?>)" <?= $producto['stock'] <= 0 ? 'disabled' : '' ?>>Agregar al carrito</button>
+          </div>
         </div>
-    </div>
-<?php
-}
-
-?>
+      </div>
+    <?php } ?>
+  </div>
+</div>
+<?php } ?>
+</body>
