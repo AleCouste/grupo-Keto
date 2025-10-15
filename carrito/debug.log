@@ -1,0 +1,98 @@
+RAW INPUT:
+
+
+JSON DECODE:
+
+
+RAW INPUT:
+
+
+JSON DECODE:
+
+
+RAW INPUT:
+
+
+JSON DECODE:
+
+
+RAW INPUT:
+{"carrito":[2,3]}
+
+JSON DECODE:
+Array
+(
+    [carrito] => Array
+        (
+            [0] => 2
+            [1] => 3
+        )
+
+)
+
+
+RAW INPUT:
+{"carrito":[2,3]}
+
+JSON DECODE:
+Array
+(
+    [carrito] => Array
+        (
+            [0] => 2
+            [1] => 3
+        )
+
+)
+
+
+RAW INPUT:
+{"carrito":[6,6,6]}
+
+JSON DECODE:
+Array
+(
+    [carrito] => Array
+        (
+            [0] => 6
+            [1] => 6
+            [2] => 6
+        )
+
+)
+
+
+RAW INPUT:
+
+
+JSON DECODE:
+
+
+RAW INPUT:
+{"carrito":[6,6,6]}
+
+JSON DECODE:
+Array
+(
+    [carrito] => Array
+        (
+            [0] => 6
+            [1] => 6
+            [2] => 6
+        )
+
+)
+
+
+RAW INPUT:
+
+
+JSON DECODE:
+
+
+RAW INPUT:
+
+
+JSON DECODE:
+
+
