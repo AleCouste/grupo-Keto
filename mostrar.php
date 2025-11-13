@@ -75,14 +75,14 @@ $resultado = $conn->query("SELECT * FROM productos ORDER BY id LIMIT 6");
 }
 
 .productos-row .card-title {
-  font-size: 1.1rem;
+  font-size: 15px;
   font-weight: 600;
   color: #333;
   margin-bottom: 5px;
 }
 
 .productos-row .card p {
-  font-size: 1rem;
+  font-size: 15px;
   color: #ff9100;
   font-weight: 600;
   margin: 5px 0 15px;
@@ -95,7 +95,7 @@ $resultado = $conn->query("SELECT * FROM productos ORDER BY id LIMIT 6");
   padding: 10px 18px;
   background: linear-gradient(90deg, #ffb347, #ff9100);
   color: white;
-  font-size: 0.9rem;
+  font-size: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 3px 6px rgba(255, 145, 0, 0.3);
@@ -129,25 +129,25 @@ $resultado = $conn->query("SELECT * FROM productos ORDER BY id LIMIT 6");
 
 <body>
 <div class="container mt-4">
-  <div class="productos-row">
-    <?php while ($producto = $resultado->fetch_assoc()) { ?>
-      <div class="card">
-        <a href="producto.php?id=<?= $producto['id'] ?>">
-          <img src="<?= $producto['imagen'] ?>" class="card-img-top" alt="Imagen del producto">
-        </a>
-        <div class="card-body">
-          <h5 class="card-title"><?= $producto['nombre'] ?></h5>
-          <p><strong>$<?= $producto['precio'] ?></strong></p>
-          <button onclick='agregarAlCarrito({
-    id: <?= (int)$producto["id"] ?>,
-    nombre: "<?= htmlspecialchars($producto["nombre"], ENT_QUOTES) ?>",
-    precio: <?= (int)$producto["precio"] ?>
-})'>
-    Agregar al carrito
-</button>
+    <div class="productos-row">
+      <?php while ($producto = $resultado->fetch_assoc()) { ?>
+        <div class="card">
+          <a href="producto.php?id=<?= $producto['id'] ?>">
+            <img src="<?= $producto['imagen'] ?>" class="card-img-top" alt="<?= htmlspecialchars($producto['nombre']) ?>">
+          </a>
+          <div class="card-body">
+            <h5 class="card-title"><?= $producto['nombre'] ?></h5>
+            <p>$<?= $producto['precio'] ?></p>
+            <button onclick='agregarAlCarrito({
+              id: <?= (int)$producto["id"] ?>,
+              nombre: "<?= htmlspecialchars($producto["nombre"], ENT_QUOTES) ?>",
+              precio: <?= (int)$producto["precio"] ?>
+            })'>
+              Agregar al carrito
+            </button>
+          </div>
         </div>
-      </div>
-    <?php } ?>
-  </div>
+      <?php } ?>
+    </div>
 </div>
 </body>

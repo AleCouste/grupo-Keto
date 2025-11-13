@@ -22,6 +22,8 @@ function agregarAlCarrito(producto) {
 
     let existente = carrito.find(p => p.id == producto.id);
 
+	// agrega productos al carrito local
+	
     if (existente) {
         existente.cantidad += cantidadAGregar;
     } else {
@@ -36,7 +38,7 @@ function agregarAlCarrito(producto) {
     localStorage.setItem("carrito", JSON.stringify(carrito));
     console.log("✅ Carrito actualizado:", carrito);
 
-    // Mostrar toast con la cantidad exacta
+    // Mostrar toastyfi/cuadrito verde con la cantidad exacta
     Toast(cantidadAGregar, producto.nombre);
 }
 
@@ -45,7 +47,9 @@ function actualizarContadorCarrito() {
   document.getElementById('carrito-count').textContent = `(${carrito.length})`;
 }
 
-let stockDisponible = 0; // Se asignará dinámicamente desde PHP
+let stockDisponible = 0; 
+
+// funcionalidades de stock que ya no funcionan 
 
 function cambiarCantidad(delta) {
   const input = document.getElementById("cantidad");
@@ -71,13 +75,13 @@ function cambiarCantidad(delta) {
 }
 
 function limpiarCarrito() {
-  // Vaciar carrito en localStorage
+  // Vacia el carrito en localStorage
   localStorage.removeItem("carrito");
 
-  // Actualizar el numerito del carrito
+  // Actualiza el numero del carrito
   actualizarContadorCarrito();
 
-  // Si estamos en la página del carrito, refrescar la vista
+  // Si estamos en la página del carrito, refresca la vista
   if (document.getElementById("lista-carrito")) {
     document.getElementById("lista-carrito").innerHTML = "<li class='list-group-item'>El carrito está vacío</li>";
     document.getElementById("total").textContent = "";

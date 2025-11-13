@@ -9,7 +9,6 @@ $dbname = "keto";
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../vendor/autoload.php'; // ajusta la ruta según tu estructura
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) die("Conexión fallida: " . $conn->connect_error);
@@ -86,6 +85,108 @@ $conn->close();
     <meta charset="UTF-8">
     <title>Crear cuenta</title>
     <link rel="stylesheet" href="../style.css">
+    <style>
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 150px);
+  padding: 40px 20px;
+  animation: fadeBackground 1s ease forwards;
+}
+
+@keyframes fadeBackground {
+  from { background-color: #fffaf2; opacity: 0.7; }
+  to { background-color: #fffaf2; opacity: 1; }
+}
+
+.container {
+  background: #ffffff;
+  padding: 40px 50px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(255, 162, 0, 0.15);
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+  color: #333;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container h1 {
+  color: #ff9100;
+  font-size: 1.9rem;
+  margin-bottom: 25px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.registro {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.registro label {
+  text-align: left;
+  font-weight: 600;
+  color: #a66b2c;
+  margin-bottom: 5px;
+  font-size: 0.95rem;
+}
+
+.registro input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  background-color: #fffaf2;
+}
+
+.registro input:focus {
+  border-color: #ff9d00;
+  box-shadow: 0 0 0 3px rgba(255, 157, 0, 0.2);
+  outline: none;
+}
+
+.registro button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #ffb347, #ff9100);
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.registro button:hover {
+  background: #e57c00;
+  transform: translateY(-2px);
+}
+
+.container p {
+  margin-top: 15px;
+  color: #333;
+  font-size: 0.9rem;
+}
+    </style>
 </head>
 <body>
     <?php include '../esencials/navbar.php'; ?>

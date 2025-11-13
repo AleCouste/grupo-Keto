@@ -60,7 +60,6 @@ $producto = $result->fetch_assoc();
     id="cantidad-<?= $producto['id'] ?>" 
     value="1" 
     min="1" 
-    max="<?= $producto['stock'] ?>" 
     style="width:60px;"
 >
 
@@ -83,41 +82,8 @@ $producto = $result->fetch_assoc();
     </div>
   </div>
 
-  
-<footer>
-    <div class="links">
-     <ul>
-        <b>compra online</b>
-        <li><a href="compra.html">mis pedidos</a></li>
-        <li><a href="compra.html">historial de compra</a></li>
-   </ul>
-    <ul>
-        <b>atencion al cliente</b>
-        <li><a href="https://www.instagram.com/keto_sur/" class="fa fa-instagram">Instagram</a></li>
-        <li><a href="https://api.whatsapp.com/send/?phone=5491157315312&text&type=phone_number&app_absent=0" class="fa fa-whatsapp">whatsap berazategui</a></li>
-        <li><a href="https://api.whatsapp.com/send/?phone=5491171252770&text&type=phone_number&app_absent=0" class="fa fa-whatsapp">whatsap la plata</a></li>
-    </ul>
-     <ul>
-        <b>sobre nosotros</b>
-        <li><a href="compra.html">mis pedidos</a></li>
-        <li><a href="compra.html">historial de compra</a></li>
-        <li><a href="compra.html">mis pedidos</a></li>
-    </ul>
-     <ul>
-        <b>contactanos</b>
-        <li><a href="compra.html">mis pedidos</a></li>
-        <li><a href="compra.html">historial de compra</a></li>
-        <li><a href="compra.html">mis pedidos</a></li>   
-    </ul>
-  </div>
-   
-    <footer>
-   
-    <div class="text">
-      <p>&copy; keto sur Todos los derechos reservados.</p>
-      <p>av.14 127 - berazategui</p>
-    </div> 
-</footer>
+  <?php include 'esencials/footer.html' ?>
+
   <script src="carrito.js"></script>
 </body>
 </html>

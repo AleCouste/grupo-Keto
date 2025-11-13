@@ -1,23 +1,46 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "keto";
+// Datos de conexión
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "keto";
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
+// Crear conexión
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-    if ($conn->connect_error) {
-        die("Conexión fallida: " . $conn->connect_error);
+// Verificar conexión
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
+
+// Verificar si se envió el formulario por POST
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Obtener los datos del formulario de forma segura
+    $nombre = $conn->real_escape_string($_POST['nombre']);
+    $descripcion = $conn->real_escape_string($_POST['descripcion']);
+    $imagen = $conn->real_escape_string($_POST['imagen']);
+    $precio = $conn->real_escape_string($_POST['precio']);
+    $categoria = $conn->real_escape_string($_POST['categoria']);
+
+    // Agregar "imagenes/" al inicio del nombre de imagen si no lo tiene
+    if (strpos($imagen, 'imagenes/') !== 0) {
+        $imagen = 'imagenes/' . $imagen;
     }
 
-$nombre = $_POST['nombre'];
-$imagen = $_POST['imagen'];
-$precio = $_POST['precio'];
-$categoria = $_POST['categoria'];
-$stock = $_POST['stock'];
+    // Consulta SQL sin stock
+    $sql = "INSERT INTO productos (nombre, descripcion, imagen, precio, categoria)
+            VALUES ('$nombre', '$descripcion', '$imagen', '$precio', '$categoria')";
 
-$sql = "INSERT INTO productos (nombre, imagen, precio, categoria, stock) VALUES ('$nombre', '$imagen', '$precio', '$categoria', '$stock')";
-$conn->query($sql);
+    if ($conn->query($sql) === TRUE) {
+        // Redirigir si todo sale bien
+        header("Location: productos.php");
+        exit;
+    } else {
+        echo "Error al insertar el producto: " . $conn->error;
+    }
+}
 
-header("Location: productos.php");
+// Cerrar conexión
+$conn->close();
 ?>
+
