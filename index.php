@@ -19,16 +19,50 @@ if (session_status() === PHP_SESSION_NONE) {
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 <body>
-    <div class=" top-line">
-        <b>Retiro en todas nuentras sucursales 📦</b>
-    </div>
     <?php include 'esencials/navbar.php' ?>
   <main>
 <br>
-        <?php include 'carrusel.html' ?>
-            <h1 style="text-align: center;"> Nuestras cosas ricas</h1>
-        <?php include 'mostrar.php' ?>
+<!-- carrusel con hero -->
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="hero-slide" style="background-image:url('imagenes/hero.jpg');">
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div class="hero-slide" style="background-image:url('imagenes/hero2.jpg');">
+            </div>
+        </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+
+<!-- los botones de las categorias-->
+</div>
+    <nav class="line">
+        <ul class="nav-categorias">
+            <li><a href="buscador.php?q=salado">salado</a></li>
+            <li><a href="buscador.php?q=viandas">viandas</a></li>
+            <li><a href="buscador.php?q=snacks">snacks</a></li>
+            <li><a href="buscador.php?q=panificados">panificados</a></li>
+            <li><a href="buscador.php?q=dulce">dulce</a></li>
+            <li><a href="buscador.php?q=alfajores">alfajores</a></li>
+        </ul>
+    </nav>
+        <h1 style="text-align: center; font-size: 60px;"> Nuestras cosas ricas</h1>
+    <?php include 'mostrar.php' ?>
   </main>
+    <div class="line-bottom">
+        <h1>¡Recibi tu Pedido sin moverte de tu casa!</h1>
+        <p>Hace tus compras más fácil y rápido. Todo lo que necesitás en un solo lugar  </p>
+    </div> 
   <?php include 'esencials/footer.html' ?>
 <script>
 (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="LD1tsm_OFfruROIkCZV7g";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();

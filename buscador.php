@@ -34,109 +34,163 @@ $resultado = $stmt->get_result();
   <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script src="carrito.js" defer></script>
   <link rel="stylesheet" href="style.css">
-
   <style>
-  body {
-    font-family: 'Poppins', sans-serif;
-    background: #f8f9fa;
-    margin: 0;
-    padding: 0;
+  .product-page-image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
   }
 
-  /* === PRODUCTOS / CARDS Modernas Centradas === */
-  .productos-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-    padding: 20px;
+  .product-page-image {
+      display: block;
+      max-width: 500px;
+      width: 90%;
+      margin: 2rem auto;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 12px var(--shadow-light);
   }
 
-  .productos-row .card {
-    flex: 1 1 calc(33.333% - 25px);
-    min-width: 240px;
-    max-width: 320px;
-    background: #fff;
-    border: none;
-    border-radius: 14px;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    text-align: center;
+  .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+  }
+
+  .card {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    background: var(--background-white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 2px 10px var(--shadow-light);
     transition: all 0.3s ease;
   }
 
-  .productos-row .card:hover {
+  .card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 10px 20px rgba(255, 145, 0, 0.25);
+    box-shadow: 0 6px 16px var(--shadow-strong);
   }
 
-  .productos-row .card .card-img-top {
+  .card .card-image-link {
+    display: block;
+    height: 220px;
+    overflow: hidden;
+  }
+
+  .card .card-image {
     width: 100%;
-    height: auto;
-    max-height: 250px;
+    height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
   }
 
-  .productos-row .card-body {
-    padding: 15px;
+  .card:hover .card-image {
+    transform: scale(1.05);
+  }
+
+  .card-content {
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 0.5rem;
+    flex-grow: 1;
   }
 
-  .productos-row .card-title {
-    font-size: 1.1rem;
+  .card-title {
+    font-size: 2.2rem;
+    text-align: center
     font-weight: 600;
-    color: #333;
-    margin-bottom: 5px;
+    color: var(--text-dark);
   }
 
-  .productos-row .card p {
-    font-size: 1rem;
-    color: #ff9100;
-    font-weight: 600;
-    margin: 5px 0 15px;
+  .card-price {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--primary-color);
   }
 
-  .productos-row .card button {
+  .btn {
     border: none;
     border-radius: 8px;
-    padding: 10px 18px;
-    background: linear-gradient(90deg, #ffb347, #ff9100);
-    color: white;
-    font-size: 0.9rem;
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #ffb347, var(--primary-color));
+    color: var(--text-light);
     cursor: pointer;
+    font-size: 1.8rem;
+    font-weight: 500;
     transition: all 0.3s ease;
-    box-shadow: 0 3px 6px rgba(255, 145, 0, 0.3);
+    text-align: center;
+    text-decoration: none;
+    margin-top: auto;
   }
 
-  .productos-row .card button:hover {
-    background: #e57c00;
+  .btn:hover {
+    background: var(--primary-hover);
     transform: translateY(-2px);
   }
 
   @media (max-width: 992px) {
-    .productos-row .card {
-      flex: 1 1 calc(50% - 25px);
-    }
+      body {
+          padding-top: 120px; 
+      }
+      .new-main-header {
+          height: 70px;
+      }
+      .new-search-form {
+          padding: 0 20px;
+      }
+      .new-main-nav ul {
+          gap: 15px;
+      }
+      .new-main-nav a {
+          font-size: 1rem;
+      }
   }
 
-  @media (max-width: 576px) {
-    .productos-row .card {
-      flex: 1 1 100%;
-    }
+  @media (max-width: 768px) {
+      body {
+          padding-top: 180px; 
+      }
+      .new-header-container {
+          padding: 0 15px;
+      }
+      .new-main-header {
+          flex-wrap: wrap;
+          height: auto;
+          padding: 15px 0;
+      }
+      .logo-wrapper {
+          width: 100%;
+          text-align: center;
+          margin-bottom: 15px;
+          order: 1;
+      }
+      .new-search-form {
+          order: 3;
+          width: 100%;
+          padding: 0;
+          margin-top: 15px;
+      }
+      .new-header-icons {
+          order: 2;
+          width: auto;
+      }
+      .new-main-nav ul {
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
+      }
+      .new-main-nav a {
+          font-size: 0.9rem;
+      }
   }
   </style>
 </head>
 
 <body>
-  <div class="top-line">
-    <b>Retiro en todas nuestras sucursales 📦</b>
-  </div>
-
   <?php include 'esencials/navbar.php'; ?>
 
   <div class="container mt-4">
@@ -144,26 +198,26 @@ $resultado = $stmt->get_result();
       Resultados para "<span style="color:#ff9100;"><?= htmlspecialchars($busqueda) ?></span>"
     </h2>
 
-    <div class="productos-row">
-      <?php while ($producto = $resultado->fetch_assoc()) { ?>
-        <div class="card">
-          <a href="producto.php?id=<?= $producto['id'] ?>">
-            <img src="<?= $producto['imagen'] ?>" class="card-img-top" alt="<?= htmlspecialchars($producto['nombre']) ?>">
-          </a>
-          <div class="card-body">
-            <h5 class="card-title"><?= $producto['nombre'] ?></h5>
-            <p>$<?= $producto['precio'] ?></p>
-            <button onclick='agregarAlCarrito({
-              id: <?= (int)$producto["id"] ?>,
-              nombre: "<?= htmlspecialchars($producto["nombre"], ENT_QUOTES) ?>",
-              precio: <?= (int)$producto["precio"] ?>
-            })'>
-              Agregar al carrito
-            </button>
-          </div>
+<!-- mismo bloque para mostrar productos -->
+  <div class="product-grid">
+    <?php while ($producto = $resultado->fetch_assoc()) { ?>
+      <div class="card">
+        <a href="producto.php?id=<?= $producto['id'] ?>" class="card-image-link">
+          <img src="<?= $producto['imagen'] ?>" class="card-image" alt="<?= htmlspecialchars($producto['nombre']) ?>">
+        </a>
+        <div class="card-content">
+          <h3 class="card-title"><?= $producto['nombre'] ?></h3>
+          <p class="card-price">$<?= $producto['precio'] ?></p>
+          <button class="btn" onclick='agregarAlCarrito({
+            id: <?= (int)$producto["id"] ?>,
+            nombre: "<?= htmlspecialchars($producto["nombre"], ENT_QUOTES) ?>",
+            precio: <?= (int)$producto["precio"] ?>
+          })'>
+            Agregar al carrito
+          </button>
         </div>
-      <?php } ?>
-    </div>
+      </div>
+    <?php } ?>
   </div>
 </body>
 </html>

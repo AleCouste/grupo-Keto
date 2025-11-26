@@ -14,21 +14,29 @@ if (session_status() === PHP_SESSION_NONE) {
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="style.css">
+  <style>  
+    .lista {
+        font-size: 20px;
+    }
+    .compra {
+        font-size: 2rem !important;
+    }
+  </style>
 </head>
 <body>
 
 <?php include 'esencials/navbar.php' ?>
 
 <div class="container mt-4">
-  <h2>Mi carrito</h2>
-  <ul id="lista-carrito" class="list-group mb-3"></ul>
-  <div id="total" class="fw-bold fs-5 mt-2"></div>
-  <button class="btn btn-primary mt-3" onclick="FinalizarCompra()">Finalizar compra</button>
-  <button class="btn btn-warning mt-2" onclick="limpiarCarrito()">Vaciar carrito</button>
+  <h2 style="font-size: 60px;">Mi carrito</h2>
+  <ul id="lista-carrito" class="list-group mb-3 lista"></ul>
+  <div id="total" class="fw-bold fs-2 mt-2"></div>
+  <button class="btn btn-primary mt-3 compra" onclick="FinalizarCompra()">Finalizar compra</button>
+  <button class="btn btn-warning mt-2 compra" onclick="limpiarCarrito()">Vaciar carrito</button>
 </div>
 
 <script>
-// === Actualizar contador en navbar ===
+
 function actualizarContadorCarrito() {
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     let contador = document.getElementById('carrito-count');
@@ -38,7 +46,7 @@ function actualizarContadorCarrito() {
     }
 }
 
-// === Vaciar carrito ===
+
 function limpiarCarrito() {
     localStorage.removeItem("carrito");
     actualizarContadorCarrito();
@@ -46,7 +54,7 @@ function limpiarCarrito() {
     document.getElementById('total').textContent = "";
 }
 
-// === Mostrar carrito ===
+
 function mostrarCarrito() {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const lista = document.getElementById('lista-carrito');
@@ -92,8 +100,8 @@ function mostrarCarrito() {
                         </div>
                     </div>
                     <div>
-                        <button class="btn btn-sm btn-danger" onclick="quitarDelCarrito(${p.id})">Quitar uno</button>
-                        <button class="btn btn-sm btn-success" onclick="agregarAlCarrito(${p.id}, '${nombre}', ${precio}, '${imagen}')">Agregar uno</button>
+                        <button class="btn btn-sm btn-danger compra" onclick="quitarDelCarrito(${p.id})">Quitar uno</button>
+                        <button class="btn btn-sm btn-success compra" onclick="agregarAlCarrito(${p.id}, '${nombre}', ${precio}, '${imagen}')">Agregar uno</button>
                     </div>
                 `;
                 lista.appendChild(li);
@@ -107,7 +115,6 @@ function mostrarCarrito() {
         });
 }
 
-// === Agregar producto al carrito ===
 function agregarAlCarrito(id, nombre, precio, imagen) {
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     let item = carrito.find(i => i.id == id);
@@ -121,7 +128,6 @@ function agregarAlCarrito(id, nombre, precio, imagen) {
     actualizarContadorCarrito();
 }
 
-// === Quitar un producto del carrito ===
 function quitarDelCarrito(id) {
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
     const index = carrito.findIndex(i => i.id == id);
@@ -137,7 +143,7 @@ function quitarDelCarrito(id) {
     actualizarContadorCarrito();
 }
 
-// === Procesar compra ===
+
 function procesarCompra() {
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
@@ -164,14 +170,14 @@ function procesarCompra() {
     .catch(err => console.error("Error en procesarCompra:", err));
 }
 
-// === Inicializar página ===
+
 document.addEventListener('DOMContentLoaded', () => {
     mostrarCarrito();
     actualizarContadorCarrito();
 });   
 
 function enviarPedidoWhatsApp(numero = "5491157315312") {
-    // Recuperar carrito del localStorage
+
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
     if (carrito.length === 0) {
@@ -179,7 +185,6 @@ function enviarPedidoWhatsApp(numero = "5491157315312") {
         return;
     }
 
-    // Crear el mensaje
     let mensaje = "🛒 Pedido:\n";
     let total = 0;
 
@@ -190,13 +195,10 @@ function enviarPedidoWhatsApp(numero = "5491157315312") {
 
     mensaje += `\nTotal: $${total}`;
 
-    // Codificar mensaje para URL
     let mensajeCodificado = encodeURIComponent(mensaje);
 
-    // Crear URL de WhatsApp
     let url = `https://wa.me/${numero}?text=${mensajeCodificado}`;
 
-    // Abrir WhatsApp en una nueva pestaña
     window.open(url, "_blank");
 }
 

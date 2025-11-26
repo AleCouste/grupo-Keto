@@ -42,18 +42,30 @@ $producto = $result->fetch_assoc();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+      .producto {
+        font-size: 50px;
+      }
+      p {
+        font-size: 1.8rem;
+      }
+      .precio {
+        font-size: 30px;
+      }
+
+    </style>
 </head>
   <?php include 'esencials/navbar.php'; ?>
 <body>
   <script> stockDisponible = <?= $producto['stock'] ?>; </script>
   <div class="row align-items-center container mt-5">
-    <!-- Columna izquierda: texto -->
+    <!-- columna izquierda texto -->
     <div class="col-md-6 mb-4">
-      <h1 class="fw-bold"><?= $producto['nombre'] ?></h1>
+      <h1 class="fw-bold producto"><?= $producto['nombre'] ?></h1>
       <p class="text-muted">Inicio · <?= $producto['nombre'] ?></p>
       <p><?= $producto['descripcion'] ?></p>
 
-      <h3 class="text-success fw-bold">$<?= number_format($producto['precio'], 0, ',', '.') ?></h3>
+      <h3 class="text-success fw-bold precio">$<?= number_format($producto['precio'], 0, ',', '.') ?></h3>
 <label for="cantidad-<?= $producto['id'] ?>">Cantidad:</label>
 <input 
     type="number" 
@@ -71,7 +83,7 @@ $producto = $result->fetch_assoc();
         precio: <?= (int)$producto["precio"] ?>,
         cantidad: cantidad
     });
-'>
+' >
     Agregar al carrito
 </button>
  
